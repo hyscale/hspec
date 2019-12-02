@@ -111,7 +111,7 @@ secrets:		 	# Secrets accept both list of keys & key value pairs
     - <secret1>			# Incase of list, secret should be created prior as <appname>-<servicename>
     - <secret2>			# - <key1> : <value1>
                                 # - <key2> : <value2>
-   - <secretN>			# - <keyN> : <valueN>
+    - <secretN>			# - <keyN> : <valueN>
 
 secretsVolumePath: <volume-path-of-secrets>
 agents:
@@ -120,6 +120,12 @@ agents:
       props: 
           <key1>: [<file/endpoint/string>(]<value1>[)]
          [<key2>: [<file/endpoint/string>(]<value2>[)]
+      secrets:                        # Secrets accept both list of keys & key value pairs
+        - <secret1>                 # Incase of list, secret should be created prior as <appname>-<servicename>
+        - <secret2>                 # - <key1> : <value1>
+                                    # - <key2> : <value2>
+        - <secretN>                 # - <keyN> : <valueN>
+      secretsVolumePath: <volume-path-of-secrets>
       volumes: 
           - path: <volume-mount-path1>
             name: <volume-name1>             # use same name as service vol for sharing
@@ -127,6 +133,7 @@ agents:
          [- path: <volume-mount-path2>
             name: <volume-name2>]
            [readOnly: <true/false>]
+      propsVolumePath: <volume-path-of-configmap>
 ```
 
 Here is the [Service Spec Schema](../schema/service-spec.json)
@@ -1093,6 +1100,14 @@ agents:
       name: <sidecarVolumeName1>
    [- path: <sidecarVolumeMountPath2>
       name: <sidecarVolumeName2>]
+    secrets:                        # Secrets accept both list of keys & key value pairs 
+       - <secret1>                 # Incase of list, secret should be created prior as <appname>-<servicename>
+       - <secret2>                 # - <key1> : <value1>
+                                   # - <key2> : <value2>
+       - <secretN>                 # - <keyN> : <valueN>
+
+    secretsVolumePath: <volume-path-of-secrets>
+    propsVolumePath: <volume-path-of-configmap>
 
 ```
 
@@ -1102,6 +1117,7 @@ agents:
 *   image - sidecar image full name
 *   props - list of env including secrets
 *   volumes - list of volumes
+*   secrets - list of secrets
 
 Following are the **Fields** in agent object
 
@@ -1144,6 +1160,33 @@ Following are the **Fields** in agent object
   <td> </td>
   <td>List of volumes to be declared for a sidecar </td>
  </tr>
+ <tr>
+   <td>secrets
+   </td>
+   <td>list
+   </td>
+   <td>
+   </td>
+   <td><em>Optional</em>   <em>Can be overridden</em>
+<p>
+<secretKeyName>
+<p>
+List of secret key Names
+	
+_Note:	The secret should be pre-created by the k8s-admin in your namespace as appName-serviceName.
+The appName & serviceName should be normalized to lowercase & replace dot(.) as hyphen(-) ,space( ) as hyphen(-). 
+Eg: appName=Sample, namespace=Sample dev results in secret of sample-sample-dev._
+	
+<p>
+<strong>Eg:</strong>
+<pre><code>
+secrets:
+- "MYSQL_ROOT_PASSWORD"
+</code>
+</pre>
+   </td>
+  </tr>
+
 </table>
 
 ### 
