@@ -77,7 +77,10 @@ image:
         [<run-commandN>]
 
 startCommand: <start-command with args>          # command+args in k8s yaml, overrides ENTRYPOINT+CMD
-replicas: <replica-count>                        # default is 1
+replicas: <replica-count>                        # represents the number of instances of this service
+                                                 # you can directly declare a integer like `replicas: 2` (default is 1)
+                                                 # or by [autoscaling](#replicas) setting (struct)
+
 memory: [<min-memory>-]<max-memory>              # Supported units are
                                                  # 1. Ki|Mi|Gi|Ti|Pi|Ei as power of two equivalents
                                                  # 2. n|u|m|k|M|G|T|P|E as plain integers
@@ -259,7 +262,8 @@ image section contains following:
 <p>
 <em>Can be overridden</em>
 <p>
-Number of instances of the service
+Number of instances of the service i.e represents the number of instances of this service
+You can directly declare a integer like `replicas: 2` (default is 1) or by [autoscaling](#replicas) setting (struct)
    </td>
   </tr>
   <tr>
@@ -1082,6 +1086,17 @@ volumes:
 
   - name: data
     path: /usr/local/content/tomcat/current/webapps
+```
+
+### replicas (aka autoscaling) 
+
+Autoscaling Setting.
+
+```yaml
+replicas:
+  min: <minReplicas>                   # minimum number of instances to start (default is 1)
+  max: <maxReplicas>                   # maximum number of instances
+  cpuThreshold: <cpuThreshold>         # Average pod cpu utilization threshold as percent that will cause a scale event
 ```
 
 ### agents
