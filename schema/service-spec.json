@@ -142,7 +142,7 @@
       }
     },
     "io.hyscale.api.replicas.Replicas": {
-      "description": "Defines the secrets of the service",
+      "description": "Defines the replicas of the service",
       "type": "object",
       "properties": {
         "min": {
