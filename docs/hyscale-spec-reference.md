@@ -77,9 +77,10 @@ image:
         [<run-commandN>]
 
 startCommand: <start-command with args>          # command+args in k8s yaml, overrides ENTRYPOINT+CMD
-replicas: <replica-count>                        # represents the number of instances of this service
+replicas: <replica-count>                        # one of integer or struct
+                                                 # represents the number of instances of this service
                                                  # you can directly declare a integer like `replicas: 2` (default is 1)
-                                                 # or by [autoscaling](#replicas) setting (struct)
+                                                 # or use struct for autoscaling setting 
 
 memory: [<min-memory>-]<max-memory>              # Supported units are
                                                  # 1. Ki|Mi|Gi|Ti|Pi|Ei as power of two equivalents
@@ -263,7 +264,7 @@ image section contains following:
 <em>Can be overridden</em>
 <p>
 Number of instances of the service i.e represents the number of instances of this service
-You can directly declare a integer like `replicas: 2` (default is 1) or by [autoscaling](#replicas) setting (struct)
+You can directly declare a integer like `replicas: 2` (default is 1) or by  <a href="#replicas">autoscaling</a> setting (struct)
    </td>
   </tr>
   <tr>
@@ -1088,7 +1089,7 @@ volumes:
     path: /usr/local/content/tomcat/current/webapps
 ```
 
-### replicas (aka autoscaling) 
+### replicas
 
 Autoscaling Setting.
 
