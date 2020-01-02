@@ -115,29 +115,6 @@
       ],
       "type": "object"
     },
-    "io.hyscale.api.autoscaler.AutoScaler": {
-      "description": "number of replicas of this service that need to scale after cpuThreshold upto max",
-      "properties": {
-        "min": {
-          "description": "Minimum number of replicas of the service",
-          "type": "integer"
-        },
-        "max": {
-          "description": " Maximum number of replicas of the service ",
-          "type": "integer"
-        },
-        "cpuThreshold": {
-          "description": "Threshold cpu after which the autoscaler will scale replicas upto max value",
-          "type": "string"
-        }
-      },
-      "required": [
-        "min",
-        "max",
-        "cpuThreshold"
-      ],
-      "type": "object"
-    },
     "io.hyscale.api.props.PropsVolumePath": {
       "description": "Defines the absolute path to where the props have to be mounted in the container",
       "type": "string"
@@ -308,10 +285,6 @@
       "type": "string",
       "pattern": "[\\w,]*"
     },
-    "autoscaler": {
-      "description": "number of replicas of this service that need to scale after cpuThreshold upto max",
-      "$ref": "#/definitions/io.hyscale.api.autoscaler.AutoScaler"
-    },
     "agents": {
       "description": "Describes the list of sidecars to be attached to the service",
       "items": {
@@ -347,10 +320,6 @@
             "items": {
               "type": "object",
               "description": "Describes the volumes for agents",
-              "required":[
-                "name",
-                "path"
-              ],
               "properties": {
                 "name": {
                   "type": "string",
@@ -360,7 +329,11 @@
                   "type": "string",
                   "description": "defines the path that volume has to be mounted on"
                 }
-              }
+              },
+              "required": [
+                "name",
+                "path"
+              ]
             }
           }
         },
