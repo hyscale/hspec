@@ -147,7 +147,8 @@
       "properties": {
         "min": {
           "type": "integer",
-          "description": "specifies the min no.of replicas required for this service "
+          "description": "specifies the min no.of replicas required for this service ",
+          "default": 1
         },
         "max": {
           "type": "integer",
@@ -158,7 +159,11 @@
           "pattern": "\\d+%",
           "description": "specifies the cpu threshold in percentage for the replicas to scale "
         }
-      }
+      },
+      "required": [
+         "max",
+         "cpuThreshold"
+      ]
     }
   },
   "required": [
