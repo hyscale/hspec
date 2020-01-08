@@ -326,18 +326,18 @@
               "type": "object",
               "description": "Describes the volumes for agents",
               "properties": {
-                "name": {
+                "attach": {
                   "type": "string",
-                  "description": "defines the volume name of the service that has to be shared to the sidecar"
+                  "description": "Defines the volume name of the service that has to be attached to the sidecar."
                 },
-                "path": {
+                "mountPath": {
                   "type": "string",
-                  "description": "defines the path that volume has to be mounted on"
+                  "description": "Defines the mount path that volume has to be mounted on the sidecar"
                 }
               },
               "required": [
-                "name",
-                "path"
+                "attach",
+                "mountPath"
               ]
             }
           }
