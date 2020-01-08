@@ -131,11 +131,11 @@ agents:
         - <secretN>                 # - <keyN> : <valueN>
       secretsVolumePath: <volume-path-of-secrets>
       volumes: 
-          - path: <volume-mount-path1>
-            name: <volume-name1>             # use same name as service vol for sharing
+          - mountPath: <volume-mount-path1>
+            attach: <volume-name1>             # use same name as service vol for sharing
            [readOnly: <true/false>]        # readOnly is valid for shared volume
-         [- path: <volume-mount-path2>
-            name: <volume-name2>]
+         [- mountPath: <volume-mount-path2>
+            attach: <volume-name2>]
            [readOnly: <true/false>]
       propsVolumePath: <volume-path-of-configmap>
 ```
@@ -182,8 +182,8 @@ agents:
     props:
         FLUEND_CONF: file(./config/log/fluentd.conf)
     volumes:
-      - path: /usr/local/tomcat/logs
-        name: logs
+      - mountPath: /usr/local/tomcat/logs
+        attach: logs
     
 profiles: # we can also write conditions to automatically activate one of the profile
 # dev profile
@@ -1112,10 +1112,10 @@ agents:
     - "<sidecarKey1Name>=<file/endpoint/string>(<sidecarValue1>)"
     [- "<sidecarKey2Name>=<file/endpoint/string>(<sidecarValue2>)"]
     volumes: 
-    - path: <sidecarVolumeMountPath1>
-      name: <sidecarVolumeName1>
-   [- path: <sidecarVolumeMountPath2>
-      name: <sidecarVolumeName2>]
+    - mountPath: <sidecarVolumeMountPath1>
+      attach: <sidecarVolumeName1>
+   [- mountPath: <sidecarVolumeMountPath2>
+      attach: <sidecarVolumeName2>]
     secrets:                        # Secrets accept both list of keys & key value pairs 
        - <secret1>                 # Incase of list, secret should be created prior as <appname>-<servicename>
        - <secret2>                 # - <key1> : <value1>
