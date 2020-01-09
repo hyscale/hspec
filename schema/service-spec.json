@@ -175,7 +175,7 @@
       "description": "Defines the hspec version",
       "type": "string",
       "enum": [
-        "0.5"
+        "0.5","0.6"
       ]
     },
     "name": {
