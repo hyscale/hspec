@@ -1,4 +1,4 @@
-# v0.7 Release
+# v0.6 Release
 
 ### Features:
 
