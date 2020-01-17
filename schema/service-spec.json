@@ -123,7 +123,7 @@
       "description": "Defines the absolute path to where the secrets have to be mounted in the container",
       "type": "string"
     },
-    "io.hyscale.api.props.Props": {
+    "io.hyscale.api.map.string": {
       "description": "Describes the key-value pair of any attribute",
       "type": "object",
       "additionalProperties": {
@@ -133,7 +133,7 @@
         ]
       }
     },
-    "io.hyscale.api.secrets.Secrets": {
+    "io.hyscale.api.list.string": {
       "description": "Defines the secrets of the service",
       "type": "array",
       "items": {
@@ -161,8 +161,8 @@
         }
       },
       "required": [
-         "max",
-         "cpuThreshold"
+        "max",
+        "cpuThreshold"
       ]
     }
   },
@@ -175,7 +175,8 @@
       "description": "Defines the hspec version",
       "type": "string",
       "enum": [
-        "0.5","0.6"
+        "0.5",
+        "0.6"
       ]
     },
     "name": {
@@ -229,12 +230,19 @@
       }
     },
     "secrets": {
-      "description": "declares all secrets key names",
-      "$ref": "#/definitions/io.hyscale.api.secrets.Secrets"
+      "description": "defines all secrets",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/io.hyscale.api.list.string"
+        },
+        {
+          "$ref": "#/definitions/io.hyscale.api.map.string"
+        }
+      ]
     },
     "props": {
       "description": "props is an unstructured key value map",
-      "$ref": "#/definitions/io.hyscale.api.props.Props"
+      "$ref": "#/definitions/io.hyscale.api.map.string"
     },
     "propsVolumePath": {
       "description": "Defines the absolute path to where the props have to be mounted in the container",
@@ -304,7 +312,7 @@
             "description": "Describes the name of the sidecar"
           },
           "props": {
-            "$ref": "#/definitions/io.hyscale.api.props.Props",
+            "$ref": "#/definitions/io.hyscale.api.map.string",
             "description": "Describes the properties of the service as key-value pairs "
           },
           "propsVolumePath": {
@@ -312,7 +320,14 @@
             "description": "Describes the properties volume of the service"
           },
           "secrets": {
-            "$ref": "#/definitions/io.hyscale.api.secrets.Secrets",
+            "anyOf": [
+              {
+                "$ref": "#/definitions/io.hyscale.api.list.string"
+              },
+              {
+                "$ref": "#/definitions/io.hyscale.api.map.string"
+              }
+            ],
             "description": "Describes the secrets of the service as an array"
           },
           "secretsVolumePath": {
