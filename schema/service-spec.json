@@ -134,7 +134,7 @@
       }
     },
     "io.hyscale.api.list.string": {
-      "description": "Defines the secrets of the service",
+      "description": "Defines the keys of any attribute the service",
       "type": "array",
       "items": {
         "type": "string",
