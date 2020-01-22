@@ -1264,7 +1264,7 @@ environement:  <profile-name>
 overrides: <service-name>
 
 memory: [<min-memory>-]<max-memory>     # overrides the range of memory defined in the service spec
-cpu: [<min-cpu>-]<max-cpu>              # overrides the the range of cpu defined in the service spec
+cpu: [<min-cpu>-]<max-cpu>              # overrides the range of cpu defined in the service spec
 
 replicas: <replica-count>               # overrides the no of replicas defined in the service spec
 
