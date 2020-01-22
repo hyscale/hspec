@@ -185,33 +185,6 @@ agents:
       - mountPath: /usr/local/tomcat/logs
         attach: logs
     
-profiles: # we can also write conditions to automatically activate one of the profile
-# dev profile
-- name: dev
-  replicas: 2
-  props:
- 	country: us
- 	region: california
- 	max_threads: 20
- 	server_xml: file(./config/tomcat/server.xml)
-
-  volumes:
-    - name: logs
-      size: 2Gi
-
-# stage profile
-- name: stage
-  replicas: 3
-  props:
-      country: india
-      region: hyderabad
-      max_threads: 10
-      server_xml: file(./config/tomcat/server.xml)
-
-  volumes:
-    - name: logs
-      size: 2Gi
-
 ```
 
 
@@ -1093,6 +1066,9 @@ volumes:
 
 Autoscaling Setting.
 
+
+*Note : Autoscaling will be effective only if cpu is specified*
+
 ```yaml
 replicas:
   min: <minReplicas>                   # minimum number of instances to start (default is 1)
@@ -1261,8 +1237,6 @@ Future versions may support:
 
 ## Profile Files 
 
-> will be implemented in future versions.
-
 In order to deploy a service into different environments (such as QA, Stage, UAT, etc.), it maybe necessary to override certain fields to customize as per that environment. This is supported by the use of profile files.
 
 A profile file may override a spec file by specifying the following:
@@ -1279,6 +1253,77 @@ The following fields of service spec can be overridden or additionally specified
 **props, secrets, replicas, resource-limits, size of volumes.
 
 _(overrides if same keyname)_
+
+### Reference Profile File with all options
+
+```yaml
+
+environement:  <profile-name>
+overrides: <service-name>
+
+memory: [<min-memory>-]<max-memory>     # overrides the range of memory defined in the service spec
+cpu: [<min-cpu>-]<max-cpu>              # overrides the the range of cpu defined in the service spec
+
+replicas: <replica-count>               # overrides the no of replicas defined in the service spec
+
+volumes:                        
+    - name: <volume-name>
+      [size: <size>]             		 # overrides the size of volumes defined in the service spec
+      [storageClass: <storageClass>]    
+
+props:                                   # overrides the prop values which are defined in the service spec
+    <key1>: [<file/endpoint/string>(]<value1>[)]     
+   [<key2>: <value2>]
+   .
+   [<keyN>: <valueN>]
+
+secrets:		 	        # overrides the secret values which are defined in the service spec 
+    - <key1>: <value1>		
+    - <key2>: <value2>			
+                        
+    - <keyN>: <valueN>			
+
+```
+
+### Example of a Profile file
+
+dev-hrms-frontend.hprof.yaml
+
+```yaml
+
+environment: dev
+overrides: hrms-frontend
+  
+cpu: 512Mi  
+replicas: 2
+props:
+   max_threads: 20
+   server_xml: file(./config/tomcat/server.xml)
+
+volumes:
+   - name: logs
+     size: 2Gi
+
+```
+
+stage-hrms-frontend.hprof.yaml
+```yaml
+
+environment: stage
+overrides: hrms-frontend
+
+cpu: 768Mi
+replicas: 3
+
+props:
+   max_threads: 10
+   server_xml: file(./config/tomcat/server.xml)
+
+volumes:
+  - name: logs
+    size: 4Gi
+
+```
 
 
 ```
