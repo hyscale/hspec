@@ -1246,7 +1246,9 @@ environment: <profile-name>
 overrides: <service-name>
 ```
 
-Profile files should be `<service-name>.<profile-name>.yaml`
+Profile files should be `<profile-name>-<service-name>.hprof.yaml`
+
+For example, `dev` profile for service spec `web.hspec.yaml` would be `dev-web.hprof.yaml`
 
 The following fields of service spec can be overridden or additionally specified (merged) in a profile file:
 
