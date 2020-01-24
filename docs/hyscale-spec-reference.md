@@ -1,7 +1,7 @@
 
 # Hyscale Spec File Reference
 
-> Version 0.6 <br />
+> Version 0.6.1 <br />
 
 
 Table of contents
@@ -26,7 +26,7 @@ Table of contents
 *   Spec file should end with “.hspec.yaml” so that service specs can be easily identified.
 *   Filename  should be named exactly as per service name `<service-name>.hspec.yaml`
 *   Multiple spec files can be present in a directory.
-*   Support environment profiles (eg: dev, stage and prod etc.) Env props and customizations are in profile file. `Future item` 
+*   Support environment profiles (eg: dev, stage and prod etc.) Env props and customizations are in profile file. 
 *   Profile files may mirror some of the fields given in the service spec. Only few fields allowed as indicated in this reference. Any fields specified in profile may get merged or override the ones given in spec, this behaviour is specified below for each field. `Future item`
 *   Supports camel case for keys. Along with camel case, Uppercase for keys can be accepted in the future. In case of Uppercase, multi-word keys are separated by underscore `(_)` delimiter.
 
