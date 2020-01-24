@@ -1,10 +1,3 @@
-# v0.6.1 Release
-
-### Features:
-
-* Added profile file support for Configuration Management.
-
-
 # v0.6 Release
 
 ### Features:
