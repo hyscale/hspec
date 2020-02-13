@@ -1,7 +1,7 @@
 
 # Hyscale Spec File Reference
 
-> Version 0.6.1 <br />
+> Version 0.6.1.1 <br />
 
 
 Table of contents
@@ -23,8 +23,8 @@ Table of contents
 *   Hyscale Spec File is a valid YAML file.
 *   Abstracts Kubernetes concepts/knowledge with a simplified DSL.
 *   Developer friendly and can be added to version control.
-*   Spec file should end with “.hspec.yaml” so that service specs can be easily identified.
-*   Filename  should be named exactly as per service name `<service-name>.hspec.yaml`
+*   Spec file should end with “.hspec” so that service specs can be easily identified.
+*   Filename  should be named exactly as per service name `<service-name>.hspec`
 *   Multiple spec files can be present in a directory.
 *   Support environment profiles (eg: dev, stage and prod etc.) Env props and customizations are in profile file. 
 *   Profile files may mirror some of the fields given in the service spec. Only few fields allowed as indicated in this reference. Any fields specified in profile may get merged or override the ones given in spec, this behaviour is specified below for each field. `Future item`
@@ -35,8 +35,8 @@ Table of contents
       *  kubernetes cluster from ~/.kube/config
       * registry authentication credentials from ~/.docker/config.json
 
+## Reference Spec File with all options 
 
-## Reference Spec File with all options
 
 ```yaml
 
@@ -190,6 +190,11 @@ agents:
 
 ## Field Reference
 
+*Note: A Boolean represents a true/false value. Booleans are formatted as English words (“true”/“false”, “yes”/“no” or “on”/“off”) for readability and may be abbreviated as a single character “y”/“n” or “Y”/“N”.*
+
+y|Y|yes|Yes|YES|n|N|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF
+
+*all the above expressions are considered to be boolean values not a string . If you want to refer the value as string use quotes like "yes".*
 
 <table>
   <tr>
@@ -1246,9 +1251,9 @@ environment: <profile-name>
 overrides: <service-name>
 ```
 
-Profile files should be `<profile-name>-<service-name>.hprof.yaml`
+Profile files should be `<profile-name>-<service-name>.hprof`
 
-For example, `dev` profile for service spec `web.hspec.yaml` would be `dev-web.hprof.yaml`
+For example, `dev` profile for service spec `web.hspec` would be `dev-web.hprof`
 
 The following fields of service spec can be overridden or additionally specified (merged) in a profile file:
 
@@ -1289,7 +1294,7 @@ secrets:		 	        # overrides the secret values which are defined in the servi
 
 ### Example of a Profile file
 
-dev-hrms-frontend.hprof.yaml
+dev-hrms-frontend.hprof
 
 ```yaml
 
@@ -1308,7 +1313,7 @@ volumes:
 
 ```
 
-stage-hrms-frontend.hprof.yaml
+stage-hrms-frontend.hprof
 ```yaml
 
 environment: stage
