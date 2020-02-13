@@ -1,6 +1,6 @@
 # v0.6.1.1 Release
 
-### Features:
+### Fixes:
 
 * Fixes for profile schema data type's
 
