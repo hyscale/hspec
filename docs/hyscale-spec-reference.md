@@ -177,13 +177,16 @@ ports:
   	httpPath: /hrms
 
 agents:
-  - name: logging-agent
-    image: gcr.io/test/logstash:2.2
+  - name: fluentd
+    image: quay.io/fluentd_elasticsearch/fluentd
     props:
-        FLUEND_CONF: file(./config/log/fluentd.conf)
+      FLUENTD_ARGS: --no-supervisor -vv
+      output.conf: file(output.conf)
+      system.input.conf: file(system.input.conf)
     volumes:
-      - mountPath: /usr/local/tomcat/logs
-        attach: logs
+    - mountPath: /mnt/log
+      attach: tomcat-logs
+    propsVolumePath: /usr/local/config
     
 ```
 
