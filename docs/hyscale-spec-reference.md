@@ -181,12 +181,9 @@ agents:
     image: quay.io/fluentd_elasticsearch/fluentd
     props:
       FLUENTD_ARGS: --no-supervisor -vv
-      output.conf: file(output.conf)
-      system.input.conf: file(system.input.conf)
     volumes:
     - mountPath: /mnt/log
       attach: tomcat-logs
-    propsVolumePath: /usr/local/config
     
 ```
 
