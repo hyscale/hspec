@@ -875,8 +875,10 @@ ports:
 
 **Port Object contains:**
 
-*   port to be declared in a pod
-*   healthcheck if available for the port to be specified along with the port definition
+*   Port to be declared in a pod
+*   A portType can be any one of (tcp, TCP, udp, UDP, http, HTTP, https, HTTPS)
+*   Healthcheck if available for the port to be specified along with the port definition
+
 
 > Note:
 Currently Health Check would be present for only one port if any. If there are multiple healthChecks declared first healthCheck will be picked.      

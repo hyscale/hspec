@@ -178,7 +178,8 @@
         "0.5",
         "0.6",
         "0.6.1",
-        "0.6.1.1"
+        "0.6.1.1",
+        "0.6.2"
       ]
     },
     "name": {
@@ -266,6 +267,7 @@
         "properties": {
           "port": {
             "type": "string",
+            "pattern": "(([0-9])+)(\\/(tcp|TCP|udp|UDP|http|HTTP|https|HTTPS))?",
             "description": "defines port number along with type. default type is tcp."
           },
           "healthCheck": {
