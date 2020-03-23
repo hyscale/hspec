@@ -875,8 +875,48 @@ ports:
 
 **Port Object contains:**
 
-*   port to be declared in a pod
-*   healthcheck if available for the port to be specified along with the port definition
+*   Port to be declared in a pod
+*   A portType can be any one of (tcp, TCP, udp, UDP, http, HTTP, https, HTTPS)
+*   Healthcheck if available for the port to be specified along with the port definition
+
+<table class="tg">
+  <tr>
+    <th>port - type</th>
+    <th>Is Healthcheck path defined</th>
+    <th>HealthCheck is performed on</th>
+  </tr>
+  <tr>
+    <td>TCP</td>
+    <td>true</td>
+    <td>HTTP</td>
+  </tr>
+  <tr>
+    <td>TCP</td>
+    <td>false</td>
+    <td>TCP</td>
+  </tr>
+  <tr>
+    <td>HTTP</td>
+    <td>true</td>
+    <td>HTTP</td>
+  </tr>
+  <tr>
+    <td>HTTP</td>
+    <td>false</td>
+    <td>TCP</td>
+  </tr>
+  <tr>
+    <td>HTTPS</td>
+    <td>true</td>
+    <td>HTTPS</td>
+  </tr>
+  <tr>
+    <td>HTTPS</td>
+    <td>false</td>
+    <td>TCP</td>
+  </tr>
+</table>
+
 
 > Note:
 Currently Health Check would be present for only one port if any. If there are multiple healthChecks declared first healthCheck will be picked.      
