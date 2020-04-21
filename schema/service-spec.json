@@ -16,6 +16,10 @@
           "type": "string",
           "default": "Dockerfile"
         },
+	"target": {
+          "description": "specify the target in case of multi-stage dockerfile. Docker will start building the image from the specified taget",
+          "type": "string",
+        },
         "args": {
           "description": "args is the list of build arguments to be passed during container image build. should be given in this format <key>=<value> ",
           "$ref": "#/definitions/io.hyscale.api.map.string"
