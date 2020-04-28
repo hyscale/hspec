@@ -17,7 +17,7 @@
           "default": "Dockerfile"
         },
 	"target": {
-          "description": "specify the target in case of multi-stage dockerfile. Docker will start building the image from the specified taget",
+          "description": "specify an intermediate build stage by name as a final stage for the resulting image in case of multi-stage dockerfile. Docker will read the instruction upto that specified stage from dockerfile while building the image.",
           "type": "string",
         },
         "args": {
