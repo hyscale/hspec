@@ -16,6 +16,10 @@
           "type": "string",
           "default": "Dockerfile"
         },
+	"target": {
+          "description": "specify an intermediate build stage by name as a final stage for the resulting image in case of multi-stage dockerfile. Docker will read the instruction upto that specified stage from dockerfile while building the image.",
+          "type": "string",
+        },
         "args": {
           "description": "args is the list of build arguments to be passed during container image build. should be given in this format <key>=<value> ",
           "$ref": "#/definitions/io.hyscale.api.map.string"
