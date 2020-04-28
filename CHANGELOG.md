@@ -1,3 +1,9 @@
+# v0.6.1.2 Release
+
+### Features:
+
+* Added target field to support multistage dockerfiles in dockerfile of hspec
+
 # v0.6.1.1 Release
 
 ### Fixes:
