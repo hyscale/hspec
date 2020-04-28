@@ -1,8 +1,14 @@
-# v0.6.1.2 Release
+# v0.6.2.1 Release
 
 ### Features:
 
 * Added target field to support multistage dockerfiles in dockerfile of hspec
+
+# v0.6.2 Release
+
+### Features:
+
+* Supporting Pattern validation for Port type 
 
 # v0.6.1.1 Release
 
