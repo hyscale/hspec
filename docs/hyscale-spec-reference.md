@@ -138,6 +138,12 @@ agents:
             attach: <volume-name2>]
            [readOnly: <true/false>]
       propsVolumePath: <volume-path-of-configmap>
+      k8sPatches:
+        - <"CustomSnippetfile-path1">
+        - [<"CustomSnippetfile-path2">]
+        .
+        .
+        - [<"CustomSnippetfile-pathN">]
 ```
 
 Here is the [Service Spec Schema](../schema/service-spec.json)
