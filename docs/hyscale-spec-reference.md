@@ -139,7 +139,7 @@ agents:
            [readOnly: <true/false>]
       propsVolumePath: <volume-path-of-configmap>
 k8sPatches:
- - <"CustomSnippetfile-path1">
+ - <"CustomSnippetfile-path1">        # Relative path to the CustomSnippet is expected here
  - [<"CustomSnippetfile-path2">]
  .
  .
