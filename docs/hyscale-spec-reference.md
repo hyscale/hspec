@@ -1250,7 +1250,7 @@ List of CustomSnippets that needs to be patched on the generated manifest files.
 
 ```yaml
 k8sPatches:
-  - <"CustomSnippetfile-path1">
+  - <"CustomSnippetfile-path1">     # Relative path to the CustomSnippet is expected here
   - [<"CustomSnippetfile-path2">]
   .
   .
