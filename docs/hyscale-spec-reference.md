@@ -139,11 +139,11 @@ agents:
            [readOnly: <true/false>]
       propsVolumePath: <volume-path-of-configmap>
 k8sPatches:
- - <"CustomSnippetfile-path1">        # Relative path to the CustomSnippet is expected here
- - [<"CustomSnippetfile-path2">]
+ - <"path-to-customSnippetFile1">        # Relative path to the CustomSnippet is expected here
+ - [<"path-to-customSnippetFile2">]
  .
  .
- - [<"CustomSnippetfile-pathN">]
+ - [<"path-to-customSnippetFileN">]
 ```
 
 Here is the [Service Spec Schema](../schema/service-spec.json)
@@ -1250,11 +1250,11 @@ List of CustomSnippets that needs to be patched on the generated manifest files.
 
 ```yaml
 k8sPatches:
-  - <"CustomSnippetfile-path1">     # Relative path to the CustomSnippet is expected here
-  - [<"CustomSnippetfile-path2">]
+  - <"path-to-customSnippetFile1">     # Relative path to the CustomSnippet is expected here
+  - [<"path-to-customSnippetFile2">]
   .
   .
-  - [<"CustomSnippetfile-pathN">]
+  - [<"path-to-customSnippetFileN">]
 ```
 
 ## Spec Template File
