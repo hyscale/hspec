@@ -2,11 +2,11 @@
 
 ### Hyscale Spec
 
-##### A Simplified Specification for developing cloud native applications as well doing app level operations.
+##### An Application centric Specification for deploying cloud native applications.
 
-Hspec is used to declaratively describe the service and its related configuration. It provides abstraction on top of its deployment infrastructure. It enables users to operate on top of applications & services rather than low level infrastructure resource objects.
+hspec (Service Specification) is used to declaratively describe the service and its related configuration. It provides abstraction on top of kubernetes deployment infrastructure. It enables users to operate on top of applications & services rather than low level infrastructure resource objects.
 
-The Hprof file is meant for environment related overrides/differences, it can override certain service related configurations like memory & cpu sizes, secrets, no.of replicas etc.
+Additionally the hprof (Environment Profile) file is meant for environment related overrides/differences. It can override certain service related configurations like memory & cpu sizes, secrets, no.of replicas etc for specific Environments such as testing, staging, production etc.
 
 A simple hspec looks like :
 
@@ -28,4 +28,19 @@ ports:
        httpPath: /docs/images/tomcat.gif
 ```
 
-Here is the detailed [documentation](docs/hyscale-spec-reference.md). 
+A sample hprof looks like below:
+
+```yaml
+environment: stage
+overrides: myservice
+volumes:
+    - name: tomcat-logs-dir
+      size: 2Gi
+
+replicas:
+    min: 1
+    max: 4
+    cpuThreshold: 30%
+```
+
+For full spec reference [click here](docs/hyscale-spec-reference.md). 
