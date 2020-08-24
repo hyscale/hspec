@@ -1,6 +1,6 @@
 ![HyScale](https://www.hyscale.io/wp-content/uploads/2019/01/hyscale-logo.png)
 
-### Hyscale Spec
+### hpsec
 
 ##### An Application centric Specification for deploying cloud native applications.
 
@@ -20,7 +20,8 @@ image:
 volumes:
     - name: tomcat-logs-dir
       path: /usr/local/tomcat/logs
- 
+
+replicas: 2
 external: true
 ports:
   - port: 8080/tcp
@@ -44,3 +45,5 @@ replicas:
 ```
 
 For full spec reference [click here](docs/hyscale-spec-reference.md). 
+
+hspec runtime implementation is [HyScale](https://github.com/hyscale/hyscale) tool, to get started with an example of using hspec to deploy application kubernetes Applications please follow hyscale [tutorial](https://github.com/hyscale/hyscale/wiki/Tutorial).
