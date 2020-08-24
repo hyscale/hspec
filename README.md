@@ -46,4 +46,4 @@ replicas:
 
 For full spec reference [click here](docs/hyscale-spec-reference.md). 
 
-hspec runtime implementation is [HyScale](https://github.com/hyscale/hyscale) tool, to get started with an example of using hspec to deploy application kubernetes Applications please follow hyscale [tutorial](https://github.com/hyscale/hyscale/wiki/Tutorial).
+hspec runtime implementation is [HyScale](https://github.com/hyscale/hyscale) tool. To get started with an example of using hspec to deploy application onto kubernetes, please follow hyscale [tutorial](https://github.com/hyscale/hyscale/wiki/Tutorial).
