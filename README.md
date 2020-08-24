@@ -1,6 +1,6 @@
 ![HyScale](https://www.hyscale.io/wp-content/uploads/2019/01/hyscale-logo.png)
 
-### hpsec
+### hspec
 
 ##### An Application centric Specification for deploying cloud native applications.
 
