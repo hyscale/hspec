@@ -138,8 +138,8 @@ agents:
             attach: <volume-name2>]
            [readOnly: <true/false>]
       propsVolumePath: <volume-path-of-configmap>
-k8sPatches:
- - <"path-to-customSnippetFile1">        # Relative path to the CustomSnippet is expected here
+k8sSnippets:
+ - <"path-to-customSnippetFile1">        # Relative path to the k8s snippet is expected here
  - [<"path-to-customSnippetFile2">]
  .
  .
@@ -430,12 +430,12 @@ List of sidecars to be attached to the pod.
    </td>
   </tr>
   <tr>
-   <td>k8sPatches</td>
+   <td>k8sSnippets</td>
    <td>list</td>
    <td></td>
    <td><em>Optional</em> <em>Can be overridden</em>
    <p>
-List of CustomSnippets that needs to be patched on the generated manifest files.
+List of k8s snippets that needs to be patched on the generated manifest files.
    </td>
    </td>
   </tr>
@@ -1244,13 +1244,13 @@ secrets:
 
 ### 
 
-### k8sPatches
+### k8sSnippets
 
-List of CustomSnippets that needs to be patched on the generated manifest files.
+List of k8s snippets that needs to be patched on the generated manifest files.
 
 ```yaml
-k8sPatches:
-  - <"path-to-customSnippetFile1">     # Relative path to the CustomSnippet is expected here
+k8sSnippets:
+  - <"path-to-customSnippetFile1">     # Relative path to the k8s snippet is expected here
   - [<"path-to-customSnippetFile2">]
   .
   .

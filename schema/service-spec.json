@@ -382,12 +382,12 @@
       },
       "type": "array"
     },
-    "k8sPatches": {
+    "k8sSnippets": {
      "type": "array",
-     "description": "Define the list of k8sPatches that needs to patched in the generated manifest files",
+     "description": "Define the list of k8sSnippets that needs to patched in the generated manifest files",
      "items": {
       "type": "list",
-      "description": "List of k8sPatches"
+      "description": "List of k8sSnippets"
      }
     }
   }
