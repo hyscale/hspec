@@ -381,6 +381,14 @@
         "description": "defines the agent with its properties"
       },
       "type": "array"
+    },
+    "k8sSnippets": {
+     "type": "array",
+     "description": "Define the list of k8sSnippets that needs to patched in the generated manifest files",
+     "items": {
+      "type": "list",
+      "description": "List of k8sSnippets"
+     }
     }
   }
 }

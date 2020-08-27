@@ -138,6 +138,12 @@ agents:
             attach: <volume-name2>]
            [readOnly: <true/false>]
       propsVolumePath: <volume-path-of-configmap>
+k8sSnippets:
+ - <"path-to-customSnippetFile1">        # Relative path to the k8s snippet is expected here
+ - [<"path-to-customSnippetFile2">]
+ .
+ .
+ - [<"path-to-customSnippetFileN">]
 ```
 
 Here is the [Service Spec Schema](../schema/service-spec.json)
@@ -421,6 +427,16 @@ List of volumes to be specified in a pod.
    <td><em>Optional</em> <em>Can be overridden</em>
 <p>
 List of sidecars to be attached to the pod.
+   </td>
+  </tr>
+  <tr>
+   <td>k8sSnippets</td>
+   <td>list</td>
+   <td></td>
+   <td><em>Optional</em> <em>Can be overridden</em>
+   <p>
+List of k8s snippets that needs to be patched on the generated manifest files.
+   </td>
    </td>
   </tr>
 </table>
@@ -1228,6 +1244,18 @@ secrets:
 
 ### 
 
+### k8sSnippets
+
+List of k8s snippets that needs to be patched on the generated manifest files.
+
+```yaml
+k8sSnippets:
+  - <"path-to-customSnippetFile1">     # Relative path to the k8s snippet is expected here
+  - [<"path-to-customSnippetFile2">]
+  .
+  .
+  - [<"path-to-customSnippetFileN">]
+```
 
 ## Spec Template File
 
