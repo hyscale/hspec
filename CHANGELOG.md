@@ -1,3 +1,9 @@
+# v0.6.3 Release
+
+### Features:
+
+* Added k8sSnippets section in  spec to support Kubernetes Snippets
+
 # v0.6.2.1 Release
 
 ### Features:
