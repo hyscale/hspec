@@ -387,6 +387,5 @@
      "description": "Define the list of k8sSnippets that needs to patched in the generated manifest files",
      "$ref": "#/definitions/io.hyscale.api.list.string"
     }
-    }
   }
 }
