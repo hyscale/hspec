@@ -1,7 +1,7 @@
 
 # Hyscale Spec File Reference
 
-> Version 0.6.1.1 <br />
+> Version 0.6.4 <br />
 
 
 Table of contents
@@ -124,7 +124,7 @@ agents:
       props: 
           <key1>: [<file/endpoint/string>(]<value1>[)]
          [<key2>: [<file/endpoint/string>(]<value2>[)]
-      secrets:                        # Secrets accept both list of keys & key value pairs
+      secrets:                      # Secrets accept both list of keys & key value pairs
         - <secret1>                 # Incase of list, secret should be created prior as <appname>-<servicename>
         - <secret2>                 # - <key1> : <value1>
                                     # - <key2> : <value2>
@@ -133,17 +133,30 @@ agents:
       volumes: 
           - mountPath: <volume-mount-path1>
             attach: <volume-name1>             # use same name as service vol for sharing
-           [readOnly: <true/false>]        # readOnly is valid for shared volume
+           [readOnly: <true/false>]            # readOnly is valid for shared volume
          [- mountPath: <volume-mount-path2>
             attach: <volume-name2>]
            [readOnly: <true/false>]
       propsVolumePath: <volume-path-of-configmap>
+      ports:
+        - port: <port-number1>[/<port-type>]         # default type is tcp
+          healthCheck:
+              httpPath: <http-path>                  # default is false
+
+       [- port: <port-number2>/<port-type>]
 k8sSnippets:
- - <"path-to-customSnippetFile1">        # Relative path to the k8s snippet is expected here
- - [<"path-to-customSnippetFile2">]
- .
- .
- - [<"path-to-customSnippetFileN">]
+    - <"path-to-customSnippetFile1">        # Relative path to the k8s snippet is expected here
+    - [<"path-to-customSnippetFile2">]
+    .
+    .
+    - [<"path-to-customSnippetFileN">]
+allowTraffic:                               # External should be false
+    - ports:
+        -<port-number-1>[/<port-type>]      # Should be available in the service spec
+        [-<port-number-N>/<port-type>]      # default type is tcp
+      from:
+        -<service-name-1>                   # Other services that can connect to this service
+        [-<service-name-N>]
 ```
 
 Here is the [Service Spec Schema](../schema/service-spec.json)
@@ -386,7 +399,9 @@ List of ports to be declared along healthcheck and ingressrules if any.
    </td>
    <td>
    </td>
-   <td><em>Optional</em>   <em>Can be overridden</em>
+   <td><em>Optional</em>  
+<p>
+   <em>Can be overridden</em>
 <p>
 <secretKeyName>
 <p>
@@ -412,7 +427,9 @@ secrets:
    </td>
    <td>
    </td>
-   <td><em>Optional</em> <em>Can be overridden</em>
+   <td><em>Optional</em> 
+<p>   
+   <em>Can be overridden</em>
 <p>
 List of volumes to be specified in a pod.
    </td>
@@ -424,7 +441,9 @@ List of volumes to be specified in a pod.
    </td>
    <td>
    </td>
-   <td><em>Optional</em> <em>Can be overridden</em>
+   <td><em>Optional</em>  
+<p>   
+   <em>Can be overridden</em>
 <p>
 List of sidecars to be attached to the pod.
    </td>
@@ -433,10 +452,26 @@ List of sidecars to be attached to the pod.
    <td>k8sSnippets</td>
    <td>list</td>
    <td></td>
-   <td><em>Optional</em> <em>Can be overridden</em>
+   <td><em>Optional</em>  
+<p>   
+   <em>Can be overridden</em>
    <p>
 List of k8s snippets that needs to be patched on the generated manifest files.
    </td>
+   </td>
+  </tr>
+  <tr>
+   <td><a href="#allowTraffic">allowTraffic</a>
+   </td>
+   <td>list
+   </td>
+   <td>
+   </td>
+   <td><em>Optional</em> 
+<p>   
+    <em>Can be overridden</em>
+<p>
+List to define what all services can connect to the service and to which ports
    </td>
   </tr>
 </table>
@@ -1018,25 +1053,23 @@ Eg:
 
 
 Eg:
+
 ```yaml
-    ports:
-      - port: 8080/TCP
-  	healthCheck:
-  	    httpPath: "/hrms" # optional
-
-      - port: 8008/TCP
+ports:
+ - port: 8080/TCP
+   healthCheck:
+     httpPath: "/hrms" # optional
+ - port: 8008/TCP
 ```
-
-
 ### volumes
 
 List of volume Objects.
 
 ```yaml
-  volumes:# optional can be inferred from docker inspection and default 2 GB + default sc
-    - name: <volumeName1>
-      path: <volumeMountPath>
-     [size: <size>]
+volumes:# optional can be inferred from docker inspection and default 2 GB + default sc
+  - name: <volumeName1>
+    path: <volumeMountPath>
+   [size: <size>]
 ```
 
 **volume Object contains:**
@@ -1146,21 +1179,26 @@ agents:
   - name: <sidecarName>
     image: <sidecarWithVersion>
     props:
-    - "<sidecarKey1Name>=<file/endpoint/string>(<sidecarValue1>)"
-    [- "<sidecarKey2Name>=<file/endpoint/string>(<sidecarValue2>)"]
+       - "<sidecarKey1Name>=<file/endpoint/string>(<sidecarValue1>)"
+       [- "<sidecarKey2Name>=<file/endpoint/string>(<sidecarValue2>)"]
     volumes: 
-    - mountPath: <sidecarVolumeMountPath1>
-      attach: <sidecarVolumeName1>
-   [- mountPath: <sidecarVolumeMountPath2>
-      attach: <sidecarVolumeName2>]
-    secrets:                        # Secrets accept both list of keys & key value pairs 
-       - <secret1>                 # Incase of list, secret should be created prior as <appname>-<servicename>
-       - <secret2>                 # - <key1> : <value1>
-                                   # - <key2> : <value2>
-       - <secretN>                 # - <keyN> : <valueN>
-
+       - mountPath: <sidecarVolumeMountPath1>
+         attach: <sidecarVolumeName1>
+       [- mountPath: <sidecarVolumeMountPath2>
+          attach: <sidecarVolumeName2>]
+    secrets:                      # Secrets accept both list of keys & key value pairs 
+      - <secret1>                 # Incase of list, secret should be created prior as <appname>-<servicename>
+      - <secret2>                 # - <key1> : <value1>
+                                  # - <key2> : <value2>
+      - <secretN>                 # - <keyN> : <valueN>
     secretsVolumePath: <volume-path-of-secrets>
     propsVolumePath: <volume-path-of-configmap>
+    ports:
+       - port: <port-number1>[/<port-type>]         # default type is tcp
+         healthCheck:
+             httpPath: <http-path>                  # default is false
+
+       [- port: <port-number2>/<port-type>]
 
 ```
 
@@ -1171,6 +1209,7 @@ agents:
 *   props - list of env including secrets
 *   volumes - list of volumes
 *   secrets - list of secrets
+*   ports - list of ports
 
 Following are the **Fields** in agent object
 
@@ -1239,10 +1278,13 @@ secrets:
 </pre>
    </td>
   </tr>
-
+<tr>
+  <td><a href="#ports">ports </td>
+  <td>list </td>
+  <td> </td>
+  <td>List of ports to be declared for a sidecar </td>
+ </tr>
 </table>
-
-### 
 
 ### k8sSnippets
 
@@ -1255,6 +1297,62 @@ k8sSnippets:
   .
   .
   - [<"path-to-customSnippetFileN">]
+```
+
+### allowTraffic
+
+> can be overridden
+
+Provides list of other services that can connect to the ports in this service. If the service is external, allowTraffic rules cannot be specified.
+
+Traffic rules when defined in profile file will replace the rules defined in service spec
+
+```yaml
+allowTraffic:                               # External should be false
+    -ports:
+       -<port-number-1>[/<port-type>]       # Should be available in the service spec
+       [-<port-number-N>/port-type]         # Default type is tcp
+     from:
+       -<service-name-1>                    # Other services that can connect to this service
+       [-<service-name-N>]
+```
+
+<table>
+  <tr>
+   <td><strong>Option</strong>
+   </td>
+   <td><strong>Type</strong>
+   </td>
+   <td><strong>Explanation</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>ports
+   </td>
+   <td>string
+   </td>
+   <td><em>Optional</em> Service ports which are accessible
+   </td>
+  </tr>
+  <tr>
+   <td>from
+   </td>
+   <td>string
+   </td>
+   <td>Optional services which can access this service
+   </td>
+  </tr>
+</table>
+
+Eg: In this case hrdatabase service can only connect to the service at port 80 or 81. No other service can connect in such case.
+
+```yaml
+allowTraffic:
+    -ports:
+       -80/tcp
+       -81/https
+     from:
+       -hrdatabase
 ```
 
 ## Spec Template File
@@ -1325,7 +1423,7 @@ For example, `dev` profile for service spec `web.hspec` would be `dev-web.hprof`
 
 The following fields of service spec can be overridden or additionally specified (merged) in a profile file:
 
-**props, secrets, replicas, resource-limits, size of volumes.
+**props, secrets, replicas, resource-limits, size of volumes, allowTraffic.
 
 _(overrides if same keyname)_
 
@@ -1343,7 +1441,7 @@ replicas: <replica-count>               # overrides the no of replicas defined i
 
 volumes:                        
     - name: <volume-name>
-      [size: <size>]             		 # overrides the size of volumes defined in the service spec
+      [size: <size>]                    # overrides the size of volumes defined in the service spec
       [storageClass: <storageClass>]    
 
 props:                                   # overrides the prop values which are defined in the service spec
@@ -1352,12 +1450,19 @@ props:                                   # overrides the prop values which are d
    .
    [<keyN>: <valueN>]
 
-secrets:		 	        # overrides the secret values which are defined in the service spec 
+secrets:                                 # overrides the secret values which are defined in the service spec 
     - <key1>: <value1>		
     - <key2>: <value2>			
                         
     - <keyN>: <valueN>			
 
+allowTraffic:                            # Will override allowTraffic rules of service spec
+    - ports:
+        -<port-number-1>                 # Should be available in the service spec
+        [-<port-number-N>]
+      from:
+        -<service-name-1>                # Other services that can connect to this service
+        [-<service-name-N>]
 ```
 
 ### Example of a Profile file
