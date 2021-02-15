@@ -117,38 +117,26 @@
       "type": "string",
       "pattern": "([\\d.\\d]+m)+(-[\\d.\\d]+m)*"
     },
-    "agents": {
-      "description": "Describes the list of sidecars to be attached to the service",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Describes the name of the sidecar"
-          },
-          "props": {
-            "$ref": "#/definitions/io.hyscale.api.map.string",
-            "description": "Describes the properties of the service sidecar as key-value pairs "
-          },
-          "secrets": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/io.hyscale.api.list.string"
-              },
-              {
-                "$ref": "#/definitions/io.hyscale.api.map.string"
-              }
-            ],
-            "description": "Describes the secrets of the profile that have to be overrided "
-          }
-        },
-        "description": "defines the agent with its properties"
-      },
-      "type": "array"
-    },
     "k8sSnippets": {
      "description": "Define the list of k8sSnippets that needs to patched in the generated manifest files",
      "$ref": "#/definitions/io.hyscale.api.list.string"
+    },
+    "allowTraffic": {
+     "type": "array",
+     "description": "Define rules to restrict traffic to the service",
+     "items": {
+       "type" : "object",
+       "properties" : {
+         "ports" : {
+           "description": "Define the ports of this service which are accessible from other services",
+           "$ref": "#/definitions/io.hyscale.api.list.string"
+         },
+         "from" : {
+           "description": "Define the list of services which can access this service ports",
+           "$ref": "#/definitions/io.hyscale.api.list.string"
+         }
+       }
+     }
     }
   }
 }
