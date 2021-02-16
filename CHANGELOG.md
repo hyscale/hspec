@@ -1,3 +1,10 @@
+# v0.6.4 Release
+
+### Features:
+
+* Added allowTraffic field in  spec to support Network Traffic Policy
+* Added ports field for Agents
+
 # v0.6.3 Release
 
 ### Features:
