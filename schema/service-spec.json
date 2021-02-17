@@ -414,6 +414,7 @@
      }
     },
     "loadBalancer":{
+        "description": ""
     }
   }
 }
