@@ -53,7 +53,7 @@
       "description": "defines loadBalancer mappings",
       "items": {
         "type": "object",
-        "description": "defines mappings",
+        "description": "defines paths mappings for port",
         "properties": {
           "port": {
             "anyOf": [
@@ -68,7 +68,7 @@
             "description": "defines port number along with type. default type is tcp."
           },
           "contextPaths": {
-            "description": "describes context paths",
+            "description": "describes context paths for the specified port",
             "$ref": "#/definitions/io.hyscale.api.list.string"
           }
         }
@@ -171,7 +171,7 @@
        "type" : "object",
        "properties" : {
          "provider" : {
-           "description": "Define the provider of the load balancer",
+           "description": "Defines the provider of the load balancer",
            "type": "string"
          },
          "className" : {
@@ -183,11 +183,11 @@
            "type": "string"
          },
          "sticky" : {
-           "description": "Define the session stickiness ",
+           "description": "Enables session stickiness ",
            "type": "boolean"
          },
          "tlsSecret" : {
-           "description": "Define the tls secret name",
+           "description": "Define the TLS secret name",
            "type": "string"
          },
          "mapping" : {
@@ -195,11 +195,11 @@
            "$ref": "#/definitions/io.hyscale.api.loadBalancer.Mappings"
          },
          "headers": {
-           "description": "Define headers bro",
+           "description": "Define headers",
            "$ref": "#/definitions/io.hyscale.api.map.string"
          },
          "labels" : {
-           "description": "Define labels bro",
+           "description": "Define labels",
            "$ref": "#/definitions/io.hyscale.api.map.string"
          }
        }
