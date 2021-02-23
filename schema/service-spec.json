@@ -209,6 +209,32 @@
           }
         }
       }
+    },
+    "io.hyscale.api.loadBalancer.Mappings":{
+      "type": "array",
+      "description": "defines loadBalancer mappings",
+      "items": {
+        "type": "object",
+        "description": "defines mappings",
+        "properties": {
+          "port": {
+            "anyOf": [
+              { 
+                "type": "integer"
+              },
+              { 
+                "type": "string",
+                "pattern": "(([0-9])+)(\\/(tcp|TCP|udp|UDP|http|HTTP|https|HTTPS))?"
+              }
+            ],
+            "description": "defines port number along with type. default type is tcp."
+          },
+          "contextPaths": {
+            "description": "describes context paths",
+            "$ref": "#/definitions/io.hyscale.api.list.string"
+          }
+        }
+      }
     }
   },
   "required": [
@@ -414,7 +440,45 @@
      }
     },
     "loadBalancer":{
-        "description": ""
+     "type": "array",
+     "description": "Defines rules for creation of load balancer to the service",
+     "items": {
+       "type" : "object",
+       "properties" : {
+         "provider" : {
+           "description": "Define the provider of the load balancer",
+           "type": "string"
+         },
+         "className" : {
+           "description": "Define the Ingress className",
+           "type": "string"
+         },
+         "host" : {
+           "description": "Define the host using which this service should be accessed",
+           "type": "string"
+         },
+         "sticky" : {
+           "description": "Define the session stickiness ",
+           "type": "boolean"
+         },
+         "tlsSecret" : {
+           "description": "Define the tls secret name",
+           "type": "string"
+         },
+         "mapping" : {
+           "description": "Define ports and corresponding context path mapping for each port",
+           "$ref": "#/definitions/io.hyscale.api.loadBalancer.Mappings"
+         },
+         "headers": {
+           "description": "Define headers bro",
+           "$ref": "#/definitions/io.hyscale.api.map.string"
+         },
+         "labels" : {
+           "description": "Define labels bro",
+           "$ref": "#/definitions/io.hyscale.api.map.string"
+         }
+       }
+     }
     }
   }
 }
