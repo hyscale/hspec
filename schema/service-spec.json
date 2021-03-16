@@ -454,7 +454,7 @@
            "type": "string"
          },
          "host" : {
-           "description": "Define the host using which this service should be accessed",
+           "description": "Define the host or domain",
            "type": "string"
          },
          "sticky" : {
@@ -462,7 +462,7 @@
            "type": "boolean"
          },
          "tlsSecret" : {
-           "description": "Define the TLS secret name",
+           "description": "Defines name of the TLS secret resource",
            "type": "string"
          },
          "mapping" : {
