@@ -166,18 +166,18 @@ loadBalancer:
     - mapping:
         - port: <port-number1>[/<port-type>] # Should be available in service spec
           contextPaths:
-	    -<path-1>                   # Path mappings for the defined port
+            -<path-1>                   # Path mappings for the defined port
             [-<path-N>]
      - headers:
           <key1>: <value1>		
          [<key2>: <value2>]
-	 .
-	 [<keyN>: <valueN>]
+         .
+         [<keyN>: <valueN>]
      - labels:
           <key1>: <value1>		
          [<key2>: <value2>]
-	 .
-	 [<keyN>: <valueN>]
+         .
+         [<keyN>: <valueN>]
 ```
 
 Here is the [Service Spec Schema](../schema/service-spec.json)
