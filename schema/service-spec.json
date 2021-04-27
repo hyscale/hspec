@@ -209,6 +209,32 @@
           }
         }
       }
+    },
+    "io.hyscale.api.loadBalancer.Mappings":{
+      "type": "array",
+      "description": "defines loadBalancer mappings",
+      "items": {
+        "type": "object",
+        "description": "defines path mappings for ports",
+        "properties": {
+          "port": {
+            "anyOf": [
+              { 
+                "type": "integer"
+              },
+              { 
+                "type": "string",
+                "pattern": "(([0-9])+)(\\/(tcp|TCP|udp|UDP|http|HTTP|https|HTTPS))?"
+              }
+            ],
+            "description": "defines port number along with type. default type is tcp."
+          },
+          "contextPaths": {
+            "description": "describes context paths for the specified port",
+            "$ref": "#/definitions/io.hyscale.api.list.string"
+          }
+        }
+      }
     }
   },
   "required": [
@@ -409,6 +435,47 @@
          "from" : {
            "description": "Define the list of services which can access this service ports",
            "$ref": "#/definitions/io.hyscale.api.list.string"
+         }
+       }
+     }
+    },
+    "loadBalancer":{
+     "type": "array",
+     "description": "Defines rules for creation of load balancer to the service",
+     "items": {
+       "type" : "object",
+       "properties" : {
+         "provider" : {
+           "description": "Defines the provider of the load balancer",
+           "type": "string"
+         },
+         "className" : {
+           "description": "Define the Ingress className",
+           "type": "string"
+         },
+         "host" : {
+           "description": "Define the host or domain",
+           "type": "string"
+         },
+         "sticky" : {
+           "description": "Enables session stickiness ",
+           "type": "boolean"
+         },
+         "tlsSecret" : {
+           "description": "Defines name of the TLS secret resource",
+           "type": "string"
+         },
+         "mapping" : {
+           "description": "Define ports and corresponding context path mapping for each port",
+           "$ref": "#/definitions/io.hyscale.api.loadBalancer.Mappings"
+         },
+         "headers": {
+           "description": "Define headers",
+           "$ref": "#/definitions/io.hyscale.api.map.string"
+         },
+         "labels" : {
+           "description": "Define labels",
+           "$ref": "#/definitions/io.hyscale.api.map.string"
          }
        }
      }
