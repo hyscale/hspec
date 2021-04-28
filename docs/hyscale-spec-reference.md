@@ -1398,12 +1398,12 @@ loadBalancer:
     - provider: <load balancer provider>
     - className: <class-name>
     - host: <host>
-    - sticky: <true/false>				 # default is false
+    - sticky: <true/false>				 
     - tlsSecret: <secret-name>
     - mapping:
-        - port: <port-number1>[/<port-type>] # Should be available in service spec
+        - port: <port-number1>[/<port-type>] 
           contextPaths:
-            -<path-1>                   # Path mappings for the defined port
+            -<path-1>                   
             [-<path-N>]
      - headers:
           <key1>: <value1>		
@@ -1431,18 +1431,18 @@ Following are the **Fields** in loadBalancer object
   <td>provider </td>
   <td>string </td>
   <td> </td>
-  <td>Defines the name of the loadBalancer provider. <p> Eg: <p> provider: nginx </td>
+  <td>Defines the name of the loadBalancer provider.</td>
  </tr>
  <tr>
   <td>className </td>
   <td>string </td>
   <td> </td>
-  <td>Defines the name of the Ingress class <p> Eg: <p> className: nginx-ingress </td>
+  <td>Defines the name of the Ingress class </td>
  </tr>
  <tr>
   <td>host </td>
   <td>String </td>
-  <td> </td> <td> <p> Defines the name of the host
+  <td> </td> <td> <p> Defines the name of the host <p> Ex) host: domain-name.com
   </td>
  </tr> 
  <tr>
@@ -1463,9 +1463,26 @@ Following are the **Fields** in loadBalancer object
 <secretKeyName>
 <p>
 Define TLS Secret name
-	
    </td>
   </tr>
+  <tr>
+  <td>mapping </td>
+  <td>Struct </td>
+  <td> </td>
+  <td>Defines paths mappings for various ports of the service<p> </td>
+ </tr>
+  <tr>
+  <td>headers </td>
+  <td>Map </td>
+  <td> </td>
+  <td>Defines the headers for the LB resource </td>
+ </tr>
+ <tr>
+  <td>labels </td>
+  <td>Map </td>
+  <td> </td> <td> <p> Defines the labels for the LB resource
+  </td>
+ </tr> 
 </table>
 
 ### Spec Template File
