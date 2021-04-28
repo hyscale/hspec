@@ -1,7 +1,7 @@
 
 # Hyscale Spec File Reference
 
-> Version 0.6.4.1 <br />
+> Version 0.6.5 <br />
 
 
 Table of contents
@@ -1593,6 +1593,27 @@ allowTraffic:                            # Will override allowTraffic rules of s
       from:
         -<service-name-1>                # Other services that can connect to this service
         [-<service-name-N>]
+loadBalancer:
+    - provider: <load balancer provider>
+    - className: <class-name>
+    - host: <host>
+    - sticky: <true/false>				 # default is false
+    - tlsSecret: <secret-name>
+    - mapping:
+        - port: <port-number1>[/<port-type>] # Should be available in service spec
+          contextPaths:
+            -<path-1>                   # Path mappings for the defined port
+            [-<path-N>]
+     - headers:
+          <key1>: <value1>		
+         [<key2>: <value2>]
+         .
+         [<keyN>: <valueN>]
+     - labels:
+          <key1>: <value1>		
+         [<key2>: <value2>]
+         .
+         [<keyN>: <valueN>]
 ```
 
 ### Example of a Profile file
