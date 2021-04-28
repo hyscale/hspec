@@ -495,6 +495,20 @@ List of k8s snippets that needs to be patched on the generated manifest files.
 List to define what all services can connect to the service and to which ports
    </td>
   </tr>
+  <tr>
+   <td><a href="#loadBalancer">loadBalancer</a>
+   </td>
+   <td>list
+   </td>
+   <td>
+   </td>
+   <td><em>Optional</em> 
+<p>   
+    <em>Can be overridden</em>
+<p>
+List to define routing rules and configurations for setting up a loadBalancer for the service.
+   </td>
+  </tr>
 </table>
 
 
@@ -1375,8 +1389,86 @@ allowTraffic:
      from:
        -hrdatabase
 ```
+### loadBalancer
 
-## Spec Template File
+List to define routing rules and configurations for setting up a loadBalancer for the service.
+
+```yaml
+loadBalancer:
+    - provider: <load balancer provider>
+    - className: <class-name>
+    - host: <host>
+    - sticky: <true/false>				 # default is false
+    - tlsSecret: <secret-name>
+    - mapping:
+        - port: <port-number1>[/<port-type>] # Should be available in service spec
+          contextPaths:
+            -<path-1>                   # Path mappings for the defined port
+            [-<path-N>]
+     - headers:
+          <key1>: <value1>		
+         [<key2>: <value2>]
+         .
+         [<keyN>: <valueN>]
+     - labels:
+          <key1>: <value1>		
+         [<key2>: <value2>]
+         .
+         [<keyN>: <valueN>]
+
+```
+
+Following are the **Fields** in loadBalancer object
+
+<table> 
+ <tr>
+  <td><strong>Option</strong> </td>
+  <td><strong>Type</strong> </td>
+  <td><strong>default</strong> </td>
+  <td><strong>Explanation</strong> </td>
+ </tr>
+ <tr> 
+  <td>provider </td>
+  <td>string </td>
+  <td> </td>
+  <td>Defines the name of the loadBalancer provider. <p> Eg: <p> provider: nginx </td>
+ </tr>
+ <tr>
+  <td>className </td>
+  <td>string </td>
+  <td> </td>
+  <td>Defines the name of the Ingress class <p> Eg: <p> className: nginx-ingress </td>
+ </tr>
+ <tr>
+  <td>host </td>
+  <td>String </td>
+  <td> </td> <td> <p> Defines the name of the host
+  </td>
+ </tr> 
+ <tr>
+  <td>sticky </td>
+  <td>boolean </td>
+  <td>false </td>
+  <td>Enable/Disable Session stickiness</td>
+ </tr>
+ <tr>
+   <td>tlsSecret
+   </td>
+   <td>String
+   </td>
+   <td>
+   </td>
+   <td>
+<p>
+<secretKeyName>
+<p>
+Define TLS Secret name
+	
+   </td>
+  </tr>
+</table>
+
+### Spec Template File
 
 > will be implemented in future versions
 
