@@ -1,3 +1,9 @@
+# v0.6.5 Release
+
+### Features:
+
+* Added loadBalancer field in spec to Load Balancer Support
+
 # v0.6.4 Release
 
 ### Features:
