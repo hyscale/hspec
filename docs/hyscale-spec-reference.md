@@ -1,7 +1,7 @@
 
 # Hyscale Spec File Reference
 
-> Version 0.6.4.1 <br />
+> Version 0.6.5 <br />
 
 
 Table of contents
@@ -166,18 +166,18 @@ loadBalancer:
     - mapping:
         - port: <port-number1>[/<port-type>] # Should be available in service spec
           contextPaths:
-	    -<path-1>                   # Path mappings for the defined port
+            -<path-1>                   # Path mappings for the defined port
             [-<path-N>]
      - headers:
           <key1>: <value1>		
          [<key2>: <value2>]
-	 .
-	 [<keyN>: <valueN>]
+         .
+         [<keyN>: <valueN>]
      - labels:
           <key1>: <value1>		
          [<key2>: <value2>]
-	 .
-	 [<keyN>: <valueN>]
+         .
+         [<keyN>: <valueN>]
 ```
 
 Here is the [Service Spec Schema](../schema/service-spec.json)
@@ -493,6 +493,20 @@ List of k8s snippets that needs to be patched on the generated manifest files.
     <em>Can be overridden</em>
 <p>
 List to define what all services can connect to the service and to which ports
+   </td>
+  </tr>
+  <tr>
+   <td><a href="#loadBalancer">loadBalancer</a>
+   </td>
+   <td>list
+   </td>
+   <td>
+   </td>
+   <td><em>Optional</em> 
+<p>   
+    <em>Can be overridden</em>
+<p>
+List to define routing rules and configurations for setting up a loadBalancer for the service.
    </td>
   </tr>
 </table>
@@ -1375,8 +1389,103 @@ allowTraffic:
      from:
        -hrdatabase
 ```
+### loadBalancer
 
-## Spec Template File
+List to define routing rules and configurations for setting up a loadBalancer for the service.
+
+```yaml
+loadBalancer:
+    - provider: <load balancer provider>
+    - className: <class-name>
+    - host: <host>
+    - sticky: <true/false>				 
+    - tlsSecret: <secret-name>
+    - mapping:
+        - port: <port-number1>[/<port-type>] 
+          contextPaths:
+            -<path-1>                   
+            [-<path-N>]
+     - headers:
+          <key1>: <value1>		
+         [<key2>: <value2>]
+         .
+         [<keyN>: <valueN>]
+     - labels:
+          <key1>: <value1>		
+         [<key2>: <value2>]
+         .
+         [<keyN>: <valueN>]
+
+```
+
+Following are the **Fields** in loadBalancer object
+
+<table> 
+ <tr>
+  <td><strong>Option</strong> </td>
+  <td><strong>Type</strong> </td>
+  <td><strong>default</strong> </td>
+  <td><strong>Explanation</strong> </td>
+ </tr>
+ <tr> 
+  <td>provider </td>
+  <td>string </td>
+  <td> </td>
+  <td>Defines the name of the loadBalancer provider.</td>
+ </tr>
+ <tr>
+  <td>className </td>
+  <td>string </td>
+  <td> </td>
+  <td>Defines the name of the Ingress class </td>
+ </tr>
+ <tr>
+  <td>host </td>
+  <td>String </td>
+  <td> </td> <td> <p> Defines the name of the host <p> Ex) host: domain-name.com
+  </td>
+ </tr> 
+ <tr>
+  <td>sticky </td>
+  <td>boolean </td>
+  <td>false </td>
+  <td>Enable/Disable Session stickiness</td>
+ </tr>
+ <tr>
+   <td>tlsSecret
+   </td>
+   <td>String
+   </td>
+   <td>
+   </td>
+   <td>
+<p>
+<secretKeyName>
+<p>
+Define TLS Secret name
+   </td>
+  </tr>
+  <tr>
+  <td>mapping </td>
+  <td>Struct </td>
+  <td> </td>
+  <td>Defines paths mappings for various ports of the service<p> </td>
+ </tr>
+  <tr>
+  <td>headers </td>
+  <td>Map </td>
+  <td> </td>
+  <td>Defines the headers for the LB resource </td>
+ </tr>
+ <tr>
+  <td>labels </td>
+  <td>Map </td>
+  <td> </td> <td> <p> Defines the labels for the LB resource
+  </td>
+ </tr> 
+</table>
+
+### Spec Template File
 
 > will be implemented in future versions
 
@@ -1484,6 +1593,27 @@ allowTraffic:                            # Will override allowTraffic rules of s
       from:
         -<service-name-1>                # Other services that can connect to this service
         [-<service-name-N>]
+loadBalancer:
+    - provider: <load balancer provider>
+    - className: <class-name>
+    - host: <host>
+    - sticky: <true/false>				 # default is false
+    - tlsSecret: <secret-name>
+    - mapping:
+        - port: <port-number1>[/<port-type>] # Should be available in service spec
+          contextPaths:
+            -<path-1>                   # Path mappings for the defined port
+            [-<path-N>]
+     - headers:
+          <key1>: <value1>		
+         [<key2>: <value2>]
+         .
+         [<keyN>: <valueN>]
+     - labels:
+          <key1>: <value1>		
+         [<key2>: <value2>]
+         .
+         [<keyN>: <valueN>]
 ```
 
 ### Example of a Profile file
