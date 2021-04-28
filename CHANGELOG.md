@@ -2,7 +2,7 @@
 
 ### Features:
 
-* Added loadBalancer field in spec to Load Balancer Support
+* Added loadBalancer field in spec for Load Balancer Support
 
 # v0.6.4 Release
 
