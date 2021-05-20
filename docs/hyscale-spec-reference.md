@@ -1,7 +1,7 @@
 
 # Hyscale Spec File Reference
 
-> Version 0.6.5 <br />
+> Version 0.6.5.1 <br />
 
 
 Table of contents
