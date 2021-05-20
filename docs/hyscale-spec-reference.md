@@ -168,16 +168,16 @@ loadBalancer:
         contextPaths:
           -<path-1>                   # Path mappings for the defined port
           [-<path-N>]
-     headers:
-        <key1>: <value1>		
-       [<key2>: <value2>]
-       .
-       [<keyN>: <valueN>]
-     labels:
-        <key1>: <value1>		
-       [<key2>: <value2>]
-       .
-       [<keyN>: <valueN>]
+    headers:
+       <key1>: <value1>		
+      [<key2>: <value2>]
+      .
+      [<keyN>: <valueN>]
+    labels:
+       <key1>: <value1>		
+      [<key2>: <value2>]
+      .
+      [<keyN>: <valueN>]
 ```
 
 Here is the [Service Spec Schema](../schema/service-spec.json)
