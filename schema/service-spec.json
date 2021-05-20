@@ -440,7 +440,7 @@
      }
     },
     "loadBalancer":{
-     "type": "array",
+     "type": "object",
      "description": "Defines rules for creation of load balancer to the service",
      "items": {
        "type" : "object",
